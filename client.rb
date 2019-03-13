@@ -1,6 +1,10 @@
 require 'socket'
 
-socket = TCPSocket.new('127.0.0.1', 1111)
+begin
+  socket = TCPSocket.new('127.0.0.1', 1111)
+rescue
+  abort 'ERROR! Connection failed'
+end
 
 Thread.new do
   loop do
