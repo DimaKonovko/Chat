@@ -1,7 +1,12 @@
 require 'socket'
 
+print 'Enter IP: '
+ip = gets.chomp
+print 'Enter port: '
+port = gets.chomp
+
 begin
-  socket = TCPSocket.new('127.0.0.1', 1111)
+  socket = TCPSocket.new(ip, port)
 rescue
   abort 'ERROR! Connection failed'
 end

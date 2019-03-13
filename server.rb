@@ -1,5 +1,7 @@
 require 'socket'
 
+# Receiving messages from client and sending to
+# other clients
 def client_handler(client, all_clients)
   loop do
     msg = client.gets
@@ -9,7 +11,21 @@ def client_handler(client, all_clients)
   end
 end
 
-server = TCPServer.new('127.0.0.1', 1111)
+# Trying to start server
+print 'Enter IP: '
+ip = gets.chomp
+print 'Enter port: '
+port = gets.chomp
+begin
+  server = TCPServer.new(ip, port)
+rescue Errno::EADDRINUSE
+  abort 'ERROR! Port is already used'
+resque
+  abort 'ERROR! Could not start server'
+end
+puts 'Server has been successfully started'
+
+# Main server logic
 all_clients = []
 threads = []
 loop do
@@ -23,4 +39,3 @@ loop do
 end
 
 threads.each(&:join)
-puts 'Server stop'
