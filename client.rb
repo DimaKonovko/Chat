@@ -1,5 +1,6 @@
 require 'socket'
 
+# Trying to connect to server
 print 'Enter IP: '
 ip = gets.chomp
 print 'Enter port: '
@@ -11,6 +12,7 @@ rescue
   abort 'ERROR! Connection failed'
 end
 
+# Main client logic
 Thread.new do
   loop do
     puts socket.gets.chomp
